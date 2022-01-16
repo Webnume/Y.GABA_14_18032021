@@ -1,11 +1,11 @@
 // import logo from './logo.svg';
 import React from "react";
 import "./assets/css/app.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import EmployeeList from "./components/EmployeeList";
 import Form from "./components/Form";
-import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -13,9 +13,24 @@ function App() {
       <div className="title">
         <h1>HRnet</h1>
       </div>
-      <Form />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Form />} />
+          <Route path="employee-list" element={<EmployeeList />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>404 ! There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </Router>
+
+      {/* <Form /> */}
       {/* <Modal /> */}
-      <EmployeeList />
+      {/* <EmployeeList /> */}
     </div>
   );
 }

@@ -11,8 +11,10 @@ const DataTable = () => {
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState({ field: "", order: "" });
   
+
   const [itemsPerPage, setItemPerPage]=useState(10);
   const ITEMS_PER_PAGE = itemsPerPage;
+  
 
   const headers = [
     { name: "First Name", field: "first-name", sortable: true },

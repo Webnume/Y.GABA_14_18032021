@@ -1,78 +1,95 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { states } from "../utils/statesAbbreviationsData";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Select from "react-select";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import employeeListActions from "../store/actions/employeeListActions";
 
-const Form = (props) => {
-  const {
-    register,
-    handleSubmit,
-    // watch,
-    formState: { errors },
-  } = useForm();
-  // watch input value by passing the name of it
-  // console.log(watch("first-name"));
+const Form = () => {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, control } = useForm();
+  const options = states.map(function (row) {
+    return { value: row.abbreviation, label: row.name };
+  });
+
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const employees = JSON.parse(localStorage.getItem("employees")) || [];
-    const employee = data;
-    employees.push(employee);
-    localStorage.setItem("employees", JSON.stringify(employees));
+    // const employee = data;
+    // employees.push(employee);
+    // localStorage.setItem("employees", JSON.stringify(employees));
+    dispatch(employeeListActions(data));
     // $('#confirmation').modal();
   };
+
   return (
     <div className="container center">
-      <a href="employee-list.html">View Current Employees</a>
+      <Link to="/employee-list">View Current Employees</Link>
       <h2>Create Employee</h2>
       <form onSubmit={handleSubmit(onSubmit)} id="create-employee">
         <div className="form-group row">
-          <label htmlFor="first-name">First Name</label>
+          <label htmlFor="firstName">First Name</label>
           <div className="col-sm-10">
             <input
               type="text"
-              id="first-name"
+              id="firstName"
               defaultValue="testFirstName"
-              {...register("first-name")}
+              {...register("firstName")}
             />
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="last-name">Last Name</label>
+          <label htmlFor="lastName">Last Name</label>
           <div className="col-sm-10">
             <input
               type="text"
-              id="last-name"
+              id="lastName"
               defaultValue="testLastName"
-              {...register("last-name")}
+              {...register("lastName")}
             />
           </div>
         </div>
 
         <div className="form-group row">
-          <label htmlFor="date-of-birth">Date of Birth</label>
-          <div className="col-sm-10">
-            <input
-              id="date-of-birth"
-              type="date"
-              defaultValue="2017-06-01"
-              {...register("date-of-birth")}
-            />
-          </div>
+          <label htmlFor="dateOfBirth">Date of Birth</label>
         </div>
+        <Controller
+          control={control}
+          name="dateOfBirth"
+          render={({ field: { onChange, onBlur, value, ref } }) => (
+            <ReactDatePicker
+              id="dateOfBirth"
+              onChange={onChange}
+              onBlur={onBlur}
+              selected={value}
+              dateFormat="dd/MM/yyyy"
+            />
+          )}
+        />
 
         <div className="form-group row">
-          <label htmlFor="start-date">Start Date</label>
-          <div className="col-sm-10">
-            <input
-              id="start-date"
-              type="date"
-              defaultValue="2017-06-01"
-              {...register("start-date")}
-            />
-          </div>
+          <label htmlFor="startDate">Start Date</label>
+          <div className="col-sm-10"></div>
         </div>
+        <Controller
+          control={control}
+          name="startDate"
+          render={({ field: { onChange, onBlur, value, ref } }) => (
+            <ReactDatePicker
+              id="startDate"
+              onChange={onChange}
+              onBlur={onBlur}
+              selected={value}
+              dateFormat="dd/MM/yyyy"
+            />
+          )}
+        />
 
-        <fieldset className="address">
-          <legend>Address</legend>
+        <fieldset className="form-group border p-3 mt-4 mb-4">
+          <legend className="w-auto px-2">Address</legend>
 
           <div className="form-group row">
             <label htmlFor="street">Street</label>
@@ -97,28 +114,34 @@ const Form = (props) => {
               />
             </div>
           </div>
-
           <div className="form-group row">
             <label htmlFor="state">State</label>
             <div className="col-sm-10">
-              <select name="state" id="state" {...register("state")}>
+              {/* <select name="state" id="state" {...register("state")}>
                 {states.map((state) => (
                   <option value={state.abbreviation} key={state.abbreviation}>
                     {state.name}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </div>
           </div>
+          <Controller
+            control={control}
+            name="state"
+            render={({ field: { onChange } }) => (
+              <Select onChange={onChange} options={options} />
+            )}
+          />
 
           <div className="form-group row">
-            <label htmlFor="zip-code">Zip Code</label>
+            <label htmlFor="zipCode">Zip Code</label>
             <div className="col-sm-10">
               <input
-                id="zip-code"
+                id="zipCode"
                 type="number"
                 defaultValue="00000"
-                {...register("zip-code")}
+                {...register("zipCode")}
               />
             </div>
           </div>
@@ -139,8 +162,8 @@ const Form = (props) => {
               <option>Legal</option>
             </select>
           </div>
-        </div><br />
-        <input type="submit" value="Save" className="btn btn-primary" />
+        </div>
+        <input type="submit" value="Save" className="btn btn-primary m-4" />
       </form>
     </div>
   );
