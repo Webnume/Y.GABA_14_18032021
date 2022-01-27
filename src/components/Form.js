@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { states } from "../utils/statesAbbreviationsData";
 import ReactDatePicker from "react-datepicker";
@@ -7,26 +7,56 @@ import Select from "react-select";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import employeeListActions from "../store/actions/employeeListActions";
+import { Modal } from "webnum-modal-react";
 
 const Form = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, control } = useForm();
-  const options = states.map(function (row) {
-    return { value: row.abbreviation, label: row.name };
+  const options = [];
+  states.map((row) => {
+    options.push({ value: row.abbreviation, label: row.name });
   });
+  // console.log(options);
 
+  const [show, setShow] = useState(false);
   const onSubmit = (data) => {
+    // const dataFormat = data.state && { ...data, state: data.state.label };
+    // const newData ={
+    //   city: "city"
+    //   dateOfBirth: undefined
+    //   department: "Sales"
+    //   firstName: "testFirstName"
+    //   lastName: "testLastName"
+    //   startDate: undefined
+    //   state: "American Samoa"
+    //   street: "street"
+    //   zipCode: "00000"
+    //   }
+    const newData = { ...data };
+    newData.state = data.state ? data.state.value : null;
+    newData.dateOfBirth = data.dateOfBirth
+      ? data.dateOfBirth.toLocaleDateString()
+      : "00/00/0000";
+    newData.startDate = data.startDate
+      ? data.startDate.toLocaleDateString()
+      : "00/00/0000";
+
     // console.log(data);
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
+    // console.log(newData);
+    dispatch(employeeListActions(newData));
+    // const employees = JSON.parse(localStorage.getItem("employees")) || [];
     // const employee = data;
     // employees.push(employee);
     // localStorage.setItem("employees", JSON.stringify(employees));
-    dispatch(employeeListActions(data));
     // $('#confirmation').modal();
+    setShow(true);
   };
 
   return (
     <div className="container center">
+      <Modal onClose={() => setShow(false)} show={show}>
+        <p>Employee Created!</p>
+      </Modal>
       <Link to="/employee-list">View Current Employees</Link>
       <h2>Create Employee</h2>
       <form onSubmit={handleSubmit(onSubmit)} id="create-employee">
@@ -65,7 +95,7 @@ const Form = () => {
               onChange={onChange}
               onBlur={onBlur}
               selected={value}
-              dateFormat="dd/MM/yyyy"
+              // dateFormat="dd/MM/yyyy"
             />
           )}
         />
@@ -83,7 +113,7 @@ const Form = () => {
               onChange={onChange}
               onBlur={onBlur}
               selected={value}
-              dateFormat="dd/MM/yyyy"
+              // dateFormat="dd/MM/yyyy"
             />
           )}
         />
@@ -116,15 +146,7 @@ const Form = () => {
           </div>
           <div className="form-group row">
             <label htmlFor="state">State</label>
-            <div className="col-sm-10">
-              {/* <select name="state" id="state" {...register("state")}>
-                {states.map((state) => (
-                  <option value={state.abbreviation} key={state.abbreviation}>
-                    {state.name}
-                  </option>
-                ))}
-              </select> */}
-            </div>
+            <div className="col-sm-10"></div>
           </div>
           <Controller
             control={control}

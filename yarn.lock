@@ -3171,7 +3171,14 @@
     "path-type" "^4.0.0"
     "yaml" "^1.10.0"
 
-"cross-spawn@^7.0.2", "cross-spawn@^7.0.3":
+"cross-env@^7.0.3":
+  "integrity" "sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw=="
+  "resolved" "https://registry.npmjs.org/cross-env/-/cross-env-7.0.3.tgz"
+  "version" "7.0.3"
+  dependencies:
+    "cross-spawn" "^7.0.1"
+
+"cross-spawn@^7.0.1", "cross-spawn@^7.0.2", "cross-spawn@^7.0.3":
   "integrity" "sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w=="
   "resolved" "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
   "version" "7.0.3"
@@ -8828,10 +8835,10 @@
   dependencies:
     "minimalistic-assert" "^1.0.0"
 
-"web-vitals@^2.1.2":
-  "integrity" "sha512-nZnEH8dj+vJFqCRYdvYv0a59iLXsb8jJkt+xvXfwgnkyPdsSLtKNlYmtTDiHmTNGXeSXtpjTTUcNvFtrAk6VMQ=="
-  "resolved" "https://registry.npmjs.org/web-vitals/-/web-vitals-2.1.2.tgz"
-  "version" "2.1.2"
+"web-vitals@^2.1.2", "web-vitals@^2.1.4":
+  "integrity" "sha512-sVWcwhU5mX6crfI5Vd2dC4qchyTqxV8URinzt25XqVh+bHEPGH4C3NPrNionCP7Obx59wrYEbNlw4Z8sjALzZg=="
+  "resolved" "https://registry.npmjs.org/web-vitals/-/web-vitals-2.1.4.tgz"
+  "version" "2.1.4"
 
 "webidl-conversions@^4.0.2":
   "integrity" "sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg=="
@@ -8847,6 +8854,20 @@
   "integrity" "sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w=="
   "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-6.1.0.tgz"
   "version" "6.1.0"
+
+"webnum-modal-react@^0.1.2":
+  "integrity" "sha512-p94sPm+nNf9tDgfJ1VTjR9kqTGKKOryORU3WCpEiUrvcWG9loCoUG+C70FduULuiUbiHkUcIQeKCz9G0xkZTFg=="
+  "resolved" "https://registry.npmjs.org/webnum-modal-react/-/webnum-modal-react-0.1.2.tgz"
+  "version" "0.1.2"
+  dependencies:
+    "@testing-library/jest-dom" "^5.16.1"
+    "@testing-library/react" "^12.1.2"
+    "@testing-library/user-event" "^13.5.0"
+    "cross-env" "^7.0.3"
+    "react" "^17.0.2"
+    "react-dom" "^17.0.2"
+    "react-scripts" "5.0.0"
+    "web-vitals" "^2.1.4"
 
 "webpack-dev-middleware@^5.3.0":
   "integrity" "sha512-MouJz+rXAm9B1OTOYaJnn6rtD/lWZPy2ufQCH3BPs8Rloh/Du6Jze4p7AeLYHkVi0giJnYLaSGDC7S+GM9arhg=="

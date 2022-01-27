@@ -42,8 +42,8 @@ export default function EmployeeList() {
   // console.log(rowsArray);
   for (let i = 0; i < employees.length; i++) {
     const tab = [];
-    Object.entries(employees[i]).forEach(([clé, valeur]) =>
-      tab.push({ cellValue: valeur || "", category: clé })
+    Object.entries(employees[i]).forEach(([key, valeur]) =>
+      tab.push({ cellValue: valeur || "", category: key })
     );
     rowsArray.push(tab);
     // console.log(rowsArray);
@@ -55,6 +55,7 @@ export default function EmployeeList() {
         <div id="employee-div" className="container">
           <h1>Current Employees</h1>
           {/* <Datatable/> */}
+          {console.log(rowsArray)}
           <Table
             headersArray={headersArray}
             rowsContent={rowsArray}
