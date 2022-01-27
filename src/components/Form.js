@@ -36,10 +36,10 @@ const Form = () => {
     newData.state = data.state ? data.state.value : null;
     newData.dateOfBirth = data.dateOfBirth
       ? data.dateOfBirth.toLocaleDateString()
-      : "00/00/0000";
+      : 0;
     newData.startDate = data.startDate
       ? data.startDate.toLocaleDateString()
-      : "00/00/0000";
+      : 0;
 
     // console.log(data);
     // console.log(newData);
