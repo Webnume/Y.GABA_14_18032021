@@ -11,27 +11,19 @@ import { Modal } from "webnum-modal-react";
 
 const Form = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit, control } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
   const options = [];
   states.map((row) => {
     options.push({ value: row.abbreviation, label: row.name });
   });
-  // console.log(options);
 
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const onSubmit = (data) => {
-    // const dataFormat = data.state && { ...data, state: data.state.label };
-    // const newData ={
-    //   city: "city"
-    //   dateOfBirth: undefined
-    //   department: "Sales"
-    //   firstName: "testFirstName"
-    //   lastName: "testLastName"
-    //   startDate: undefined
-    //   state: "American Samoa"
-    //   street: "street"
-    //   zipCode: "00000"
-    //   }
     const newData = { ...data };
     newData.state = data.state ? data.state.value : null;
     newData.dateOfBirth = data.dateOfBirth
@@ -40,21 +32,13 @@ const Form = () => {
     newData.startDate = data.startDate
       ? data.startDate.toLocaleDateString()
       : 0;
-
-    // console.log(data);
-    // console.log(newData);
     dispatch(employeeListActions(newData));
-    // const employees = JSON.parse(localStorage.getItem("employees")) || [];
-    // const employee = data;
-    // employees.push(employee);
-    // localStorage.setItem("employees", JSON.stringify(employees));
-    // $('#confirmation').modal();
-    setShow(true);
+    setShowModal(true);
   };
 
   return (
     <div className="container center">
-      <Modal onClose={() => setShow(false)} show={show}>
+      <Modal onClose={() => setShowModal(false)} show={showModal}>
         <p>Employee Created!</p>
       </Modal>
       <Link to="/employee-list">View Current Employees</Link>
@@ -66,9 +50,12 @@ const Form = () => {
             <input
               type="text"
               id="firstName"
-              defaultValue="testFirstName"
-              {...register("firstName")}
+              // defaultValue="testFirstName"
+              {...register("firstName", { required: true })}
             />
+            {errors.firstName && (
+              <span className="error">This field is required</span>
+            )}
           </div>
         </div>
         <div className="form-group row">
@@ -77,9 +64,12 @@ const Form = () => {
             <input
               type="text"
               id="lastName"
-              defaultValue="testLastName"
-              {...register("lastName")}
+              // defaultValue="testLastName"
+              {...register("lastName", { required: true })}
             />
+            {errors.lastName && (
+              <span className="error">This field is required</span>
+            )}
           </div>
         </div>
 
@@ -89,6 +79,7 @@ const Form = () => {
         <Controller
           control={control}
           name="dateOfBirth"
+          rules={{ required: true }}
           render={({ field: { onChange, onBlur, value, ref } }) => (
             <ReactDatePicker
               id="dateOfBirth"
@@ -99,6 +90,9 @@ const Form = () => {
             />
           )}
         />
+        {errors.dateOfBirth && (
+          <span className="error">This field is required</span>
+        )}
 
         <div className="form-group row">
           <label htmlFor="startDate">Start Date</label>
@@ -107,6 +101,7 @@ const Form = () => {
         <Controller
           control={control}
           name="startDate"
+          rules={{ required: true }}
           render={({ field: { onChange, onBlur, value, ref } }) => (
             <ReactDatePicker
               id="startDate"
@@ -117,6 +112,9 @@ const Form = () => {
             />
           )}
         />
+        {errors.startDate && (
+          <span className="error">This field is required</span>
+        )}
 
         <fieldset className="form-group border p-3 mt-4 mb-4">
           <legend className="w-auto px-2">Address</legend>
@@ -127,9 +125,12 @@ const Form = () => {
               <input
                 id="street"
                 type="text"
-                defaultValue="street"
-                {...register("street")}
+                // defaultValue="street"
+                {...register("street", { required: true })}
               />
+              {errors.street && (
+                <span className="error">This field is required</span>
+              )}
             </div>
           </div>
 
@@ -139,9 +140,12 @@ const Form = () => {
               <input
                 id="city"
                 type="text"
-                defaultValue="city"
-                {...register("city")}
+                // defaultValue="city"
+                {...register("city", { required: true })}
               />
+              {errors.city && (
+                <span className="error">This field is required</span>
+              )}
             </div>
           </div>
           <div className="form-group row">
@@ -151,20 +155,26 @@ const Form = () => {
           <Controller
             control={control}
             name="state"
+            rules={{ required: true }}
             render={({ field: { onChange } }) => (
               <Select onChange={onChange} options={options} />
             )}
           />
-
+          {errors.state && (
+            <span className="error">This field is required</span>
+          )}
           <div className="form-group row">
             <label htmlFor="zipCode">Zip Code</label>
             <div className="col-sm-10">
               <input
                 id="zipCode"
                 type="number"
-                defaultValue="00000"
-                {...register("zipCode")}
+                // defaultValue="00000"
+                {...register("zipCode", { required: true })}
               />
+              {errors.zipCode && (
+                <span className="error">This field is required</span>
+              )}
             </div>
           </div>
         </fieldset>
@@ -175,8 +185,11 @@ const Form = () => {
             <select
               name="department"
               id="department"
-              {...register("department")}
+              {...register("department", { required: true })}
             >
+              {errors.department && (
+                <span className="error">This field is required</span>
+              )}
               <option>Sales</option>
               <option>Marketing</option>
               <option>Engineering</option>

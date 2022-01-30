@@ -15,7 +15,8 @@ function App() {
       </div>
       <Router>
         <Routes>
-          <Route path="/" element={<Form />} />
+          <Route path="/" element={<Form />} />          
+          <Route path="index.html" element={<Form />} />
           <Route path="employee-list" element={<EmployeeList />} />
           <Route
             path="*"
