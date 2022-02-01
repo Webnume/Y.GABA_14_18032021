@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Faire passer une librairie jQuery vers React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
