@@ -19,7 +19,7 @@ const Form = () => {
   } = useForm();
   const options = [];
   states.map((row) => {
-    options.push({ value: row.abbreviation, label: row.name });
+    return options.push({ value: row.abbreviation, label: row.name });
   });
 
   const [showModal, setShowModal] = useState(false);
