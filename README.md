@@ -12,6 +12,10 @@ Déployer un composant en librairie sur NPM.
 - Déployer une application front-end
 - Programmer en JavaScript avec la programmation fonctionnelle
 
+## Live demo
+
+[HRnet](https://optimistic-shockley-a18fe4.netlify.app/) 
+
 ## Librairie créée et publiée sur NPM puis utilisée dans le cadre de ce projet
 
 [webnum-modal-react](https://github.com/Webnume/Y.GABA_14_18032021_webnum-modal-npm) 
