@@ -29,7 +29,7 @@ export default function EmployeeList() {
   return (
     <div>
       <div>
-        <div id="employee-div" className="container">
+        <div id="employee-div" className="containerTable">
           <h1>Current Employees</h1>
           <Table
             headersArray={headersArray}

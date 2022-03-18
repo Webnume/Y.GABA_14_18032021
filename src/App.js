@@ -3,15 +3,16 @@ import React from "react";
 import "./assets/css/app.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import EmployeeList from "./components/EmployeeList";
 import Form from "./components/Form";
+import logo from "./assets/images/logo.jpg"
 
 function App() {
   return (
     <div>
       <div className="title">
         <h1>HRnet</h1>
+        <img src={logo} width="220px" alt="logo" />
       </div>
       <Router>
         <Routes>
