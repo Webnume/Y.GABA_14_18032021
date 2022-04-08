@@ -18,7 +18,7 @@ const Form = () => {
     formState: { errors },
   } = useForm();
   const options = [];
-  states.map((row) => {
+  states.forEach((row) => {
     return options.push({ value: row.abbreviation, label: row.name });
   });
 
