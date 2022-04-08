@@ -1,5 +1,4 @@
 const employeeListActions = (data) => {
-  // console.log("Action", data);
   return (dispatch) => {
     dispatch({
       type: "CREATE_EMPLOYEE",
