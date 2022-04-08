@@ -19,9 +19,9 @@ export default function EmployeeList() {
   const entriesSelector = [10, 25, 50, 100];
   const employees = useSelector((state) => state.employees);
   const rowsArray = [];
-  for (let i = 0; i < employees.length; i++) {
+  for (let employee of employees) {
     const tab = [];
-    Object.entries(employees[i]).forEach(([key, valeur]) =>
+    Object.entries(employee).forEach(([key, valeur]) =>
       tab.push({ cellValue: valeur || "", category: key })
     );
     rowsArray.push(tab);

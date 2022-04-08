@@ -87,7 +87,6 @@ const Form = () => {
                 onChange={onChange}
                 onBlur={onBlur}
                 selected={value}
-                // dateFormat="dd/MM/yyyy"
               />
             )}
           />
